@@ -1,30 +1,13 @@
 package com.grinderwolf.swm.nms.v1_16_R1;
 
 import com.flowpowered.nbt.CompoundTag;
+import com.google.common.collect.ImmutableSet;
 import com.grinderwolf.swm.api.world.SlimeWorld;
 import com.grinderwolf.swm.api.world.properties.SlimeProperties;
 import com.grinderwolf.swm.api.world.properties.SlimePropertyMap;
 import com.grinderwolf.swm.nms.CraftSlimeWorld;
 import com.grinderwolf.swm.nms.SlimeNMS;
-import net.minecraft.server.v1_16_R1.BlockPosition;
-import net.minecraft.server.v1_16_R1.ChunkCoordIntPair;
-import net.minecraft.server.v1_16_R1.ChunkProviderServer;
-import net.minecraft.server.v1_16_R1.Convertable;
-import net.minecraft.server.v1_16_R1.DataConverterRegistry;
-import net.minecraft.server.v1_16_R1.DataFixTypes;
-import net.minecraft.server.v1_16_R1.DimensionManager;
-import net.minecraft.server.v1_16_R1.GameProfileSerializer;
-import net.minecraft.server.v1_16_R1.IRegistry;
-import net.minecraft.server.v1_16_R1.MinecraftKey;
-import net.minecraft.server.v1_16_R1.MinecraftServer;
-import net.minecraft.server.v1_16_R1.MobSpawnerCat;
-import net.minecraft.server.v1_16_R1.NBTTagCompound;
-import net.minecraft.server.v1_16_R1.ResourceKey;
-import net.minecraft.server.v1_16_R1.TicketType;
-import net.minecraft.server.v1_16_R1.Unit;
-import net.minecraft.server.v1_16_R1.WorldDataServer;
-import net.minecraft.server.v1_16_R1.WorldDimension;
-import net.minecraft.server.v1_16_R1.WorldServer;
+import net.minecraft.server.v1_16_R1.*;
 import lombok.Getter;
 import lombok.SneakyThrows;
 import org.apache.logging.log4j.LogManager;
@@ -99,6 +82,16 @@ public class v1_16_R1SlimeNMS implements SlimeNMS {
         DimensionManager dimensionManager = mcServer.f.a().fromId(env.getId());
         WorldDataServer worldData = (WorldDataServer)dataManager.getWorldData();
         ResourceKey<net.minecraft.server.v1_16_R1.World> worldKey = ResourceKey.a(IRegistry.ae, new MinecraftKey(world.getName()));
+
+        Main.convertWorld(
+            conversionSession,
+            DataConverterRegistry.a(),
+            mcServer.options.has("eraseCache"),
+            () -> true,
+            worldData.getGeneratorSettings().e().c().stream().map((entry) ->
+                ResourceKey.a(IRegistry.ad, entry.getKey().a())
+            ).collect(ImmutableSet.toImmutableSet())
+        );
 
         return new CustomWorldServer((CraftSlimeWorld) world, dataManager, conversionSession, dimensionManager, env, worldData, worldKey, dimensionManagerKey, Collections.emptyList());
     }
@@ -199,6 +192,16 @@ public class v1_16_R1SlimeNMS implements SlimeNMS {
 
         DimensionManager dimensionManager = mcServer.f.a().a(dimensionManagerKey);
         WorldDataServer worldData = (WorldDataServer)dataManager.getWorldData();
+
+        Main.convertWorld(
+            conversionSession,
+            DataConverterRegistry.a(),
+            mcServer.options.has("eraseCache"),
+            () -> true,
+            worldData.getGeneratorSettings().e().c().stream().map((entry) ->
+                ResourceKey.a(IRegistry.ad, entry.getKey().a())
+            ).collect(ImmutableSet.toImmutableSet())
+        );
 
         CustomWorldServer server = null;
 

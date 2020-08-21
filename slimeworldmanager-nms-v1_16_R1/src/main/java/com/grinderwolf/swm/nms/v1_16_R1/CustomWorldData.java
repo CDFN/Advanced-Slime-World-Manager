@@ -1,22 +1,15 @@
 package com.grinderwolf.swm.nms.v1_16_R1;
 
 import com.flowpowered.nbt.CompoundTag;
+import com.google.common.collect.ImmutableSet;
 import com.grinderwolf.swm.api.world.properties.SlimeProperties;
 import com.grinderwolf.swm.nms.CraftSlimeWorld;
 import com.mojang.serialization.Lifecycle;
 import lombok.Getter;
 
-import net.minecraft.server.v1_16_R1.BlockPosition;
-import net.minecraft.server.v1_16_R1.DedicatedServer;
-import net.minecraft.server.v1_16_R1.EnumDifficulty;
-import net.minecraft.server.v1_16_R1.EnumGamemode;
-import net.minecraft.server.v1_16_R1.GameRules;
+import net.minecraft.server.v1_16_R1.*;
 import net.minecraft.server.v1_16_R1.GameRules.GameRuleKey;
 import net.minecraft.server.v1_16_R1.GameRules.GameRuleValue;
-import net.minecraft.server.v1_16_R1.MinecraftServer;
-import net.minecraft.server.v1_16_R1.NBTTagCompound;
-import net.minecraft.server.v1_16_R1.WorldDataServer;
-import net.minecraft.server.v1_16_R1.WorldSettings;
 import org.bukkit.WorldType;
 import org.bukkit.craftbukkit.v1_16_R1.CraftWorld;
 
