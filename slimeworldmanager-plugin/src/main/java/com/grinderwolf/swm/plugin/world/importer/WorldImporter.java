@@ -39,6 +39,8 @@ public class WorldImporter {
         // World version
         byte worldVersion;
 
+        System.out.println("WORLD VERSION: " + data.getVersion());
+
         if (data.getVersion() == -1) { // DataVersion tag was added in 1.9
             worldVersion = 0x01;
         } else if (data.getVersion() < 818) {

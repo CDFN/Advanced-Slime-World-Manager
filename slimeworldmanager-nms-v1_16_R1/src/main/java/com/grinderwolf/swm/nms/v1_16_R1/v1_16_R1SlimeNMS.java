@@ -47,7 +47,7 @@ public class v1_16_R1SlimeNMS implements SlimeNMS {
 
     private static final Logger LOGGER = LogManager.getLogger("SWM");
 
-    private final byte worldVersion = 0x05;
+    private final byte worldVersion = 0x06;
 
     private boolean loadingDefaultWorlds = true; // If true, the addWorld method will not be skipped
 
