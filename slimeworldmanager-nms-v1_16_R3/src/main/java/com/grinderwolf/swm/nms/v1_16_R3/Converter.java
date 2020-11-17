@@ -1,34 +1,8 @@
 package com.grinderwolf.swm.nms.v1_16_R3;
 
-import com.flowpowered.nbt.ByteArrayTag;
-import com.flowpowered.nbt.ByteTag;
-import com.flowpowered.nbt.CompoundMap;
-import com.flowpowered.nbt.CompoundTag;
-import com.flowpowered.nbt.DoubleTag;
-import com.flowpowered.nbt.FloatTag;
-import com.flowpowered.nbt.IntArrayTag;
-import com.flowpowered.nbt.IntTag;
-import com.flowpowered.nbt.ListTag;
-import com.flowpowered.nbt.LongArrayTag;
-import com.flowpowered.nbt.LongTag;
-import com.flowpowered.nbt.ShortTag;
-import com.flowpowered.nbt.StringTag;
-import com.flowpowered.nbt.Tag;
-import com.flowpowered.nbt.TagType;
+import com.flowpowered.nbt.*;
 import com.grinderwolf.swm.api.utils.NibbleArray;
-import net.minecraft.server.v1_16_R3.NBTBase;
-import net.minecraft.server.v1_16_R3.NBTTagByte;
-import net.minecraft.server.v1_16_R3.NBTTagByteArray;
-import net.minecraft.server.v1_16_R3.NBTTagCompound;
-import net.minecraft.server.v1_16_R3.NBTTagDouble;
-import net.minecraft.server.v1_16_R3.NBTTagFloat;
-import net.minecraft.server.v1_16_R3.NBTTagInt;
-import net.minecraft.server.v1_16_R3.NBTTagIntArray;
-import net.minecraft.server.v1_16_R3.NBTTagList;
-import net.minecraft.server.v1_16_R3.NBTTagLong;
-import net.minecraft.server.v1_16_R3.NBTTagLongArray;
-import net.minecraft.server.v1_16_R3.NBTTagShort;
-import net.minecraft.server.v1_16_R3.NBTTagString;
+import net.minecraft.server.v1_16_R3.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -72,7 +46,7 @@ public class Converter {
                     return NBTTagString.a(((StringTag) tag).getValue());
                 case TAG_LIST:
                     NBTTagList list = new NBTTagList();
-                    ((ListTag<?>) tag).getValue().stream().map(com.grinderwolf.swm.nms.v1_16_R3.Converter::convertTag).forEach(list::add);
+                    ((ListTag<?>) tag).getValue().stream().map(Converter::convertTag).forEach(list::add);
 
                     return list;
                 case TAG_COMPOUND:
@@ -113,7 +87,7 @@ public class Converter {
             case 7:
                 return new ByteArrayTag(name, ((NBTTagByteArray) base).getBytes());
             case 8:
-                return new StringTag(name, base.asString());
+                return new StringTag(name, ((NBTTagString) base).asString());
             case 9:
                 List<Tag> list = new ArrayList<>();
                 NBTTagList originalList = ((NBTTagList) base);

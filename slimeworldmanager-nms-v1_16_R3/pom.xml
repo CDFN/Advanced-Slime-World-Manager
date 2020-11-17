@@ -34,12 +34,6 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>org.spigotmc</groupId>
-            <artifactId>spigot</artifactId>
-            <version>1.16.4-R0.1-SNAPSHOT</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
             <groupId>com.grinderwolf</groupId>
             <artifactId>slimeworldmanager-classmodifier</artifactId>
             <version>${project.version}</version>
